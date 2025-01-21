@@ -1,0 +1,124 @@
+import { React, useState, useEffect } from "react";
+import "../styles/registermodal.css";
+import CustomButton from "../reusables/CustomButton";
+
+
+const RegisterModal = ({ isOpen, onClose }) => {
+  const initialData = {
+    fullName: "",
+    email: "",
+    password: "",
+    phone: "",
+    address: "",
+  };
+
+  const [formData, setFormData] = useState(initialData);
+
+  // Handle input change
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Submitted Data:", formData);
+    onClose(); // Close modal after submission
+  };
+
+  // Prevent background scrolling when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("modal-open");
+      document.querySelector(".header").classList.add("fixed-header");
+    } else {
+      document.body.classList.remove("modal-open");
+      document.querySelector(".header").classList.remove("fixed-header");
+    }
+
+    return () => {
+      document.body.classList.remove("modal-open");
+      document.querySelector(".header").classList.remove("fixed-header");
+    };
+  }, [isOpen]);
+
+  
+  return (
+    <>
+      {isOpen && <div className="modal-backdrop fade show"></div>} {/* Overlay */}
+
+      <div className={`modal ${isOpen ? "show d-block" : "d-none"}`} role="dialog">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            {/* Header */}
+            <div className="modal-header">
+              <h4 className="modal-title">Register</h4>
+              <button type="button" className="close" onClick={onClose}>
+              &times;
+              </button>
+            </div>
+
+            {/* Body */}
+            <div className="modal-body">
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  name="fullName"
+                  className="form-control"
+                  placeholder="Full name"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="email"
+                  name="email"
+                  className="form-control"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="password"
+                  name="password"
+                  className="form-control"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="phone"
+                  className="form-control"
+                  placeholder="Phone number"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="text"
+                  name="address"
+                  className="form-control"
+                  placeholder="Address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  required
+                />
+                <CustomButton className="btn btn-secondary" type="submit" textContent="Register"/>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default RegisterModal;

@@ -1,0 +1,215 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+
+.center_box {
+  width: 470px;
+  height: 310px;
+  padding-bottom:40px;
+  text-align: center;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #2995E2;
+}
+
+.signup_box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 50vh; */
+  margin: 0;
+}
+
+.signuptitle{
+  font-size: 25px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #0050c7;
+}
+
+input{
+  -moz-border-radius:2px;
+  -webkit-border-radius:2px;
+  border-radius:4px;
+  padding:4px 14px;
+  border:2px solid #2995E2;
+  box-shadow: 0px 10px 14px -7px #2995E2;
+  -moz-box-shadow: 0px 10px 14px -7px #2995E2;
+  -webkit-box-shadow: 0px 10px 14px -7px #2995E2;
+  margin-top: 10px;
+  /* min-width: 358px; */
+  min-width: 60%;
+  height: 40px;
+}
+
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus,textarea:focus,select:focus{
+  border:3px solid #ffaa22;
+  -moz-box-shadow: 0px 10px 14px -7px #ffaa22;
+  -webkit-box-shadow: 0px 10px 14px -7px #ffaa22;
+  box-shadow: 0px 10px 14px -7px #ffaa22;
+  -webkit-animation: myfirst 5s linear 2s infinite alternate; /* Chrome, Safari, Opera */
+  animation: myfirst 5s linear 2s infinite alternate; /* Standard syntax */
+  outline: none; /* Remove the default outline */
+  }
+
+  .btn{
+      width: 120px;
+      height: 35px;
+      margin: 20px;
+      color: #ffffff;
+      border: none;
+      margin-top:50px;
+      background-color: rgb(22, 139, 222);
+  }
+
+  .btn :hover{
+    border: none;
+      background-color: rgb(47, 48, 49);
+  }
+
+  .own_account span{
+      margin-top: -40px;
+      font-size: 16px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+
+  .nonedeco{
+    text-decoration: none;
+  }
+
+
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    max-width: 200px;
+    width: 90%;
+    z-index: 1055; /* Higher than dropdown */
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+/* Ensure close button stays on the right */
+.modal-header .close {
+    position: absolute;
+    right: 10px; /* Adjust if necessary */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+  }
+  
+  .modal-open {
+    overflow: hidden; /* Prevent scrolling */
+  }
+  
+  .fixed-header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1056; /* Keep header below modal */
+  }
+  
+
+
+
+/* Ensure modal overlay appears on top */
+.modal-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.7);
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1050; /* Bootstrap modals use 1050, so match it */
+}
+
+/* Modal content - Ensure it is above Bootstrap elements */
+.modal {
+position: absolute; /* Ensure it is positioned absolutely */
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%); /* Center the modal */
+background: white;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+max-width: 600px;
+width: 80%;
+height: 500px;
+margin-top: 250px;
+z-index: 1051; /* Ensure it is above the overlay */
+text-align: center;
+}
+
+/* Close button */
+.close-btn {
+margin-top: 10px;
+padding: 10px 15px;
+background: red;
+color: white;
+border: none;
+cursor: pointer;
+text-align: center;
+}
+
+.btn btn-primary{
+max-width: 50%;
+}
+
+.close {
+margin-left: 380px;
+
+}
+
+.modal-overlay {
+z-index: 1050 !important;
+}
+
+.modal {
+z-index: 1051 !important;
+display: block !important;
+}
+
+.modal {
+z-index: 1051 !important; /* Make sure it's above the backdrop */
+}
+
+.modal-backdrop {
+z-index: 1050 !important; /* Keep it behind the modal */
+}
+
+body.modal-open {
+overflow: hidden; /* Prevent scrolling */
+padding-right: 15px; /* Prevent content from shifting */
+}
+
+.dropdown-menu {
+position: absolute;
+z-index: 1050; /* Lower than modal (1052) and overlay (1051) */
+}
