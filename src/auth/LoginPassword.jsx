@@ -1,22 +1,14 @@
 import { React, useState, useEffect } from "react";
-import axios from "axios";
-import "../styles/registermodal.css";
+import "../styles/loginmodal.css";
 import CustomButton from "../reusables/CustomButton";
 
 
-const RegisterModal = ({ isOpen, onClose }) => {
+const LoginPasswordModal = ({ isOpen, onClose }) => {
   const initialData = {
-    fullName: "",
     email: "",
-    password: "",
-    phoneNumber: "",  // Updated key to match API request
-    address: "",
   };
 
   const [formData, setFormData] = useState(initialData);
-  const [responseMessage, setResponseMessage] = useState("");
-  const [responseColor, setResponseColor] = useState("");
-  const [loading, setLoading] = useState(false); // Loading state
 
   // Handle input change
   const handleChange = (event) => {
@@ -28,51 +20,29 @@ const RegisterModal = ({ isOpen, onClose }) => {
   };
 
   // Handle form submission
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    setLoading(true);
-    setResponseMessage("");
-  
-    console.log("Submitting Data:", JSON.stringify(formData, null, 2)); // Log request payload
-  
-        try {
-          const response = await axios.post("http://localhost:8080/api/member/register", formData, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-            withCredentials: true,
-          });
-      
-          // Handle successful registration and catch exception
-          setResponseMessage(response.data.regMsg || "Registration successful!");
-          setResponseColor("green"); 
-        setFormData(initialData);
-      } catch (error) {
-        console.error("Error Response:", error.response ? error.response.data : error.message);
-        setResponseMessage(error.response?.data || "Registration failed.");
-        setResponseColor("brown");
-      
-        //setTimeout(() => onClose(), 3000); // Close modal after 3 seconds
-      }
-  setLoading(false);
-};
+    console.log("Submitted Data:", formData);
+    onClose(); // Close modal after submission
+  };
 
   // Prevent background scrolling when modal is open
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("modal-open");
-      document.querySelector(".header")?.classList.add("fixed-header");
+      document.querySelector(".header").classList.add("fixed-header");
     } else {
       document.body.classList.remove("modal-open");
-      document.querySelector(".header")?.classList.remove("fixed-header");
+      document.querySelector(".header").classList.remove("fixed-header");
     }
 
     return () => {
       document.body.classList.remove("modal-open");
-      document.querySelector(".header")?.classList.remove("fixed-header");
+      document.querySelector(".header").classList.remove("fixed-header");
     };
   }, [isOpen]);
 
+  
   return (
     <>
       {isOpen && <div className="modal-backdrop fade show"></div>} {/* Overlay */}
@@ -84,13 +54,11 @@ const RegisterModal = ({ isOpen, onClose }) => {
             <div className="modal-header">
               <h4 className="modal-title">Register</h4>
               <button type="button" className="close" onClick={onClose}>&#160;
-                &times;&#160;
+              &times;&#160;
               </button>
             </div>
 
             {/* Body */}
-            {responseMessage && <div style={{ color: responseColor }}>{responseMessage}</div>}
-
             <div className="modal-body">
               <form onSubmit={handleSubmit}>
                 <input
@@ -122,10 +90,10 @@ const RegisterModal = ({ isOpen, onClose }) => {
                 />
                 <input
                   type="text"
-                  name="phoneNumber"
+                  name="phone"
                   className="form-control"
                   placeholder="Phone number"
-                  value={formData.phoneNumber}
+                  value={formData.phone}
                   onChange={handleChange}
                   required
                 />
@@ -138,28 +106,15 @@ const RegisterModal = ({ isOpen, onClose }) => {
                   onChange={handleChange}
                   required
                 />
-
-                <CustomButton
-                  className="btn btn-secondary"
-                  type="submit"
-                  textContent={loading ? "Registering..." : "Register"}
-                  disabled={loading} // Disable button when submitting
-                />
+                <CustomButton className="btn btn-secondary" type="submit" textContent="Register"/>
               </form>
-
-              {/* Show response message */}
-              {/* Show Response Message */}
-      
-      
-              {/* {responseMessage && <p className="text-center mt-3">{responseMessage}</p>} */}
             </div>
+
           </div>
         </div>
-
-        
       </div>
     </>
   );
 };
 
-export default RegisterModal;
+export default LoginPasswordModal;
