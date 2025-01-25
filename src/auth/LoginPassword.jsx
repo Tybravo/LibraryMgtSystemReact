@@ -1,14 +1,22 @@
 import { React, useState, useEffect } from "react";
+import axios from "axios";
 import "../styles/loginmodal.css";
 import CustomButton from "../reusables/CustomButton";
 
 
-const LoginPasswordModal = ({ isOpen, onClose }) => {
-  const initialData = {
-    email: "",
-  };
+const LoginPassword = ({ isOpen, onClose }) => {
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const [responseMessage, setResponseMessage] = useState("");
+  const [responseColor, setResponseColor] = useState("");
 
-  const [formData, setFormData] = useState(initialData);
+  // Fetch stored email when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      const storedEmail = localStorage.getItem("userEmail") || "";
+      setFormData({ email: storedEmail, password: "" });
+    }
+  }, [isOpen]);
 
   // Handle input change
   const handleChange = (event) => {
@@ -20,96 +28,69 @@ const LoginPasswordModal = ({ isOpen, onClose }) => {
   };
 
   // Handle form submission
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Submitted Data:", formData);
-    onClose(); // Close modal after submission
+    setLoading(true);
+    setResponseMessage("");
+
+    try {
+      const response = await axios.post("http://localhost:8080/api/member/login-password", formData, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
+
+      // Show success message and clear stored email
+      setResponseMessage(response.data.LogMsg || "Login successful");
+      setResponseColor("green");
+      localStorage.removeItem("userEmail"); // Clear email after successful login
+    } catch (error) {
+      console.error("Error Response:", error.response ? error.response.data : error.message);
+      setResponseMessage(error.response?.data || "Invalid password.");
+      setResponseColor("red");
+    }
+    setLoading(false);
   };
 
-  // Prevent background scrolling when modal is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.classList.add("modal-open");
-      document.querySelector(".header").classList.add("fixed-header");
-    } else {
-      document.body.classList.remove("modal-open");
-      document.querySelector(".header").classList.remove("fixed-header");
-    }
 
-    return () => {
-      document.body.classList.remove("modal-open");
-      document.querySelector(".header").classList.remove("fixed-header");
-    };
-  }, [isOpen]);
-
-  
   return (
     <>
-      {isOpen && <div className="modal-backdrop fade show"></div>} {/* Overlay */}
-
+      {isOpen && <div className="modal-backdrop fade show"></div>}
       <div className={`modal ${isOpen ? "show d-block" : "d-none"}`} role="dialog">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
-            {/* Header */}
             <div className="modal-header">
-              <h4 className="modal-title">Register</h4>
-              <button type="button" className="close" onClick={onClose}>&#160;
-              &times;&#160;
-              </button>
+              <h4 className="modal-title">Enter Password</h4>
+              <button type="button" className="close" onClick={onClose}>&#160;&times;&#160;</button>
             </div>
 
-            {/* Body */}
+            {responseMessage && <div style={{ color: responseColor, textAlign: "center" }}>{responseMessage}</div>}
+
             <div className="modal-body">
               <form onSubmit={handleSubmit}>
-                <input
-                  type="text"
-                  name="fullName"
-                  className="form-control"
-                  placeholder="Full name"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  required
-                />
                 <input
                   type="email"
                   name="email"
                   className="form-control"
-                  placeholder="Email"
                   value={formData.email}
-                  onChange={handleChange}
-                  required
+                  readOnly // Prevent user from modifying email
                 />
                 <input
                   type="password"
                   name="password"
                   className="form-control"
-                  placeholder="Password"
+                  placeholder="Enter Password"
                   value={formData.password}
                   onChange={handleChange}
                   required
                 />
-                <input
-                  type="text"
-                  name="phone"
-                  className="form-control"
-                  placeholder="Phone number"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
+                <CustomButton
+                  className="btn btn-secondary"
+                  type="submit"
+                  textContent={loading ? "Logging in..." : "Submit"}
+                  disabled={loading}
                 />
-                <input
-                  type="text"
-                  name="address"
-                  className="form-control"
-                  placeholder="Address"
-                  value={formData.address}
-                  onChange={handleChange}
-                  required
-                />
-                <CustomButton className="btn btn-secondary" type="submit" textContent="Register"/>
               </form>
             </div>
-
           </div>
         </div>
       </div>
@@ -117,4 +98,4 @@ const LoginPasswordModal = ({ isOpen, onClose }) => {
   );
 };
 
-export default LoginPasswordModal;
+export default LoginPassword;

@@ -212,3 +212,15 @@
   z-index: 1050; /* Lower than modal (1052) and overlay (1051) */
   }
   
+
+  .footer-newsletter form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adds spacing between input and button */
+  }
+
+  form .btn {
+    margin-top: 20px;
+    margin-left: 2px;
+  }
+  

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RegisterModal from "../Auth/Register";
 import LoginEmailModal from "../auth/LoginEmail";
+import LogoutModal from "../auth/Logout";
 import AOS from "aos"; 
 
 function Header() {
@@ -70,6 +71,9 @@ function Header() {
                   <li>
                     <a href="#" onClick={() => openModal("register")}> Register</a>
                   </li>
+                  <li>
+                    <a href="#" onClick={() => openModal("logout")}> Logout</a>
+                  </li>
                 </ul>
               </li>
               <li><a href="#">Pricing</a></li>
@@ -79,7 +83,8 @@ function Header() {
             {/* Render the appropriate modal based on modalType */}
             {modalType === "register" && <RegisterModal isOpen={true} onClose={closeModal} />}
             {modalType === "login" && <LoginEmailModal isOpen={true} onClose={closeModal} />}
-            </nav>
+            {modalType === "logout" && <LogoutModal isOpen={true} onClose={closeModal} />}
+           </nav>
           
           <i className="mobile-nav-toggle d-xl-none bi bi-list" onClick={toggleMobileMenu}></i>
           <a className="btn-getstarted" href="#">Get Started</a>

@@ -9,14 +9,14 @@ const RegisterModal = ({ isOpen, onClose }) => {
     fullName: "",
     email: "",
     password: "",
-    phoneNumber: "",  // Updated key to match API request
+    phoneNumber: "",
     address: "",
   };
 
   const [formData, setFormData] = useState(initialData);
+  const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
   const [responseColor, setResponseColor] = useState("");
-  const [loading, setLoading] = useState(false); // Loading state
 
   // Handle input change
   const handleChange = (event) => {
@@ -50,7 +50,7 @@ const RegisterModal = ({ isOpen, onClose }) => {
       } catch (error) {
         console.error("Error Response:", error.response ? error.response.data : error.message);
         setResponseMessage(error.response?.data || "Registration failed.");
-        setResponseColor("brown");
+        setResponseColor("red");
       
         //setTimeout(() => onClose(), 3000); // Close modal after 3 seconds
       }
@@ -66,12 +66,12 @@ const RegisterModal = ({ isOpen, onClose }) => {
       document.body.classList.remove("modal-open");
       document.querySelector(".header")?.classList.remove("fixed-header");
     }
-
     return () => {
       document.body.classList.remove("modal-open");
       document.querySelector(".header")?.classList.remove("fixed-header");
     };
   }, [isOpen]);
+
 
   return (
     <>
