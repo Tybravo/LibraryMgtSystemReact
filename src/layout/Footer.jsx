@@ -74,7 +74,7 @@ const [loading, setLoading] = useState(false);
           <div className="col-lg-2 col-md-3 footer-links">
             <h4>Our Services</h4>
             <ul>
-              <li><a href="#"> Book Lending</a></li>
+              <li><a href="#">Book Lending</a></li>
               <li><a href="#">Reference Services</a></li>
               <li><a href="#">Digital Resources</a></li>
               <li><a href="#">Community Programs</a></li>

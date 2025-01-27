@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import RegisterModal from "../Auth/Register";
-import LoginEmailModal from "../auth/LoginEmail";
 import LogoutModal from "../auth/Logout";
+import MyProfileModal from "../components/MyProfile";
 import AOS from "aos"; 
 
 
-function Header() {
+function HeaderAdmin() {
   const [modalType, setModalType] = useState(null); 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
@@ -62,33 +61,29 @@ function Header() {
               <li><a href="#">Books</a></li>
               <li className="dropdown">
                 <a href="#" onClick={toggleProfileDropdown}>
-                  <span>Member</span>
+                  <span>Profile</span>
                   <i className="bi bi-chevron-down toggle-dropdown"></i>
                 </a>
                 <ul className={isProfileDropdownOpen ? "dropdown-active" : ""}>
                   <li> 
-                    <a href="#" onClick={() => openModal("login")}> Login</a>
-                  </li>
-                  <li>
-                    <a href="#" onClick={() => openModal("register")}> Register</a>
+                    <a href="#" onClick={() => openModal("myProfile")}> My Profile</a>
                   </li>
                   <li>
                     <a href="#" onClick={() => openModal("logout")}> Logout</a>
                   </li>
                 </ul>
               </li>
-              <li><a href="#">Pricing</a></li>
+              <li><a href="#">Programs</a></li>
               <li><a href="#">Contact</a></li>
             </ul>
             
             {/* Render the appropriate modal based on modalType */}
-            {modalType === "register" && <RegisterModal isOpen={true} onClose={closeModal} />}
-            {modalType === "login" && <LoginEmailModal isOpen={true} onClose={closeModal} />}
+            {modalType === "myProfile" && <MyProfileModal isOpen={true} onClose={closeModal} />}
             {modalType === "logout" && <LogoutModal isOpen={true} onClose={closeModal} />}
            </nav>
           
           <i className="mobile-nav-toggle d-xl-none bi bi-list" onClick={toggleMobileMenu}></i>
-          <a className="btn-getstarted" href="#">Get Started</a>
+          <a className="btn-getstarted" href="#">Resources</a>
         </div>
       </header>
 
@@ -96,4 +91,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default HeaderAdmin;

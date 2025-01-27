@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import heroBg from "/assets/img/herobg.jpg";
 import about1 from "/assets/img/about1.jpg";
-import Header from "../layout/Header";
-import Footer from "../layout/Footer";
 
 
 function Home() {  
   return (
     <div>
-      <Header/>
 
       {/* Hero Section */}
       <section id="hero" className="hero section dark-background">
@@ -44,8 +41,6 @@ function Home() {
           </div>
         </div>
       </section>
-
-      <Footer/>
     </div>
 
   );

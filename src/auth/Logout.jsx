@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 import axios from "axios";
 import CustomButton from "../reusables/CustomButton";
 
@@ -8,6 +9,8 @@ const LogoutModal = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
   const [responseColor, setResponseColor] = useState("");
+
+  const navigate = useNavigate();
 
   // Function to clear session cookies
   const clearSessionCookies = () => {
@@ -34,11 +37,18 @@ const LogoutModal = ({ isOpen, onClose }) => {
 
       // Clear session-related storage and cookies
       localStorage.removeItem("userEmail"); // Clear stored email
+      localStorage.removeItem("email"); // Clear session email
+      localStorage.removeItem("accessLevel"); //Clear access level
+      localStorage.removeItem("sessionStatus"); //Clear session status
       sessionStorage.clear(); // Clear session storage
       clearSessionCookies(); // Clear cookies (including JSESSIONID)
 
-      onClose(); // Close modal after logout
-      window.location.reload(); // Reload to update UI state
+      //if (localStorage.getItem("")) {      
+      //onClose(); // Close modal after logout
+      //navigate("/");  // Reload to initial Home state
+      // window.location.reload(); 
+      window.location.href = "/";
+      // }
     } catch (error) {
       console.error("Logout Error:", error.response ? error.response.data : error.message);
       setResponseMessage(error.response?.data || "Logout failed. Try again.");

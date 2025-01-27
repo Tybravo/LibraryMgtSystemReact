@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; 
 import axios from "axios";
 import "../styles/loginmodal.css";
 import CustomButton from "../reusables/CustomButton";
@@ -9,6 +10,9 @@ const LoginPassword = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
   const [responseColor, setResponseColor] = useState("");
+
+  // Initialize navigate function
+  const navigate = useNavigate();
 
   // Fetch stored email when modal opens
   useEffect(() => {
@@ -39,10 +43,21 @@ const LoginPassword = ({ isOpen, onClose }) => {
         withCredentials: true,
       });
 
-      // Show success message and clear stored email
-      setResponseMessage(response.data.LogMsg || "Login successful");
-      setResponseColor("green");
-      localStorage.removeItem("userEmail"); // Clear email after successful login
+      // Store session details in localStorage
+      localStorage.setItem("sessionStatus", response.data.sessionStatus);
+      localStorage.setItem("accessLevel", response.data.accessLevel);
+      localStorage.setItem("email", response.data.sessionEmail); 
+
+      // Only remove 'userEmail' after storing 'email'
+      if (localStorage.getItem("email")) {
+        localStorage.removeItem("userEmail"); 
+      }
+
+      //onClose();
+      // Redirect to App.jsx
+      // navigate("/"); 
+      window.location.href = "/";
+
     } catch (error) {
       console.error("Error Response:", error.response ? error.response.data : error.message);
       setResponseMessage(error.response?.data || "Invalid password.");
