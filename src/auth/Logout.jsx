@@ -43,18 +43,12 @@ const LogoutModal = ({ isOpen, onClose }) => {
       sessionStorage.clear(); // Clear session storage
       clearSessionCookies(); // Clear cookies (including JSESSIONID)
 
-      //if (localStorage.getItem("")) {      
-      //onClose(); // Close modal after logout
-      //navigate("/");  // Reload to initial Home state
-      // window.location.reload(); 
       window.location.href = "/";
-      // }
     } catch (error) {
       console.error("Logout Error:", error.response ? error.response.data : error.message);
       setResponseMessage(error.response?.data || "Logout failed. Try again.");
       setResponseColor("red");
     }
-
     setLoading(false);
   };
 

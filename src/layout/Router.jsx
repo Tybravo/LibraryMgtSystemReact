@@ -6,7 +6,6 @@ import Contact from '../components/contact'
 import Home from '../components/Home'
 import Pricing from '../components/pricing'
 import Profile from '../components/profile'
-//import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Routes, Route } from 'react-router-dom'
 
 
