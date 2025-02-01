@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import AOS from "aos";
 
 import './App.css'
 import Header from "./layout/Header";
@@ -10,9 +11,18 @@ import HeaderMember from "./layout/HeaderMember";
 import RouterMember from "./layout/RouterMember";
 import HeaderAdmin from "./layout/HeaderAdmin";
 import RouterAdmin from "./layout/RouterAdmin";
+import HeaderAdminDashboard from "./layout/HeaderAdminDashboard";
+
 
 const App = () => {
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+      AOS.init({
+        duration: 1000,
+        once: true,
+      });
+    }, []);
 
   useEffect(() => {
     const storedSession = localStorage.getItem("sessionStatus") === "true";
@@ -57,6 +67,7 @@ const App = () => {
         ) : user.accessLevel === 20 ? (
           <>
             <HeaderAdmin />
+            <HeaderAdminDashboard/>
             <RouterAdmin />
             <Footer />
           </>
