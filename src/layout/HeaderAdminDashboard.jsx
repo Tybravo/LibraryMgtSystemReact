@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import '../assetz/dist/styles.css';  // Adjust path based on folder structure
+import '../assetz/dist/stylez.css';
 import '../assetz/dist/all.css';    
 import AOS from "aos";
 
