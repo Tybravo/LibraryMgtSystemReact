@@ -51,8 +51,6 @@ const RegisterModal = ({ isOpen, onClose }) => {
         console.error("Error Response:", error.response ? error.response.data : error.message);
         setResponseMessage(error.response?.data || "Registration failed.");
         setResponseColor("red");
-      
-        //setTimeout(() => onClose(), 3000); // Close modal after 3 seconds
       }
   setLoading(false);
 };
