@@ -13,6 +13,8 @@ import HeaderAdmin from "./layout/HeaderAdmin";
 import RouterAdmin from "./layout/RouterAdmin";
 import HeaderAdminDashboard from "./layout/HeaderAdminDashboard";
 
+import SessionTimeout from "./auth/SessionTimeout";
+
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -54,9 +56,29 @@ const App = () => {
     }
   }, []);
 
+// Logout function that clears everything (localStorage, sessionStorage, cookies)
+const handleLogout = () => {
+  localStorage.clear();
+  sessionStorage.clear();
+  clearSessionCookies();
+  window.location.href = "/"; // Redirect to home page
+};
+
+// Function to clear cookies
+const clearSessionCookies = () => {
+  document.cookie.split(";").forEach((cookie) => {
+    document.cookie = cookie
+      .replace(/^ +/, "")
+      .replace(/=.*/, `=;expires=${new Date(0).toUTCString()};path=/`);
+  });
+};
+
 
   return (
     <>
+     {/* Include SessionTimeout to monitor user activity */}
+     {user?.sessionStatus && <SessionTimeout onLogout={handleLogout} />}
+
       {user?.sessionStatus ? (
         user.accessLevel === 10 ? (
           <>
