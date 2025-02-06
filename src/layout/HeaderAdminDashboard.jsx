@@ -59,7 +59,7 @@ const HeaderAdminDashboard = () => {
             <div className="p-1 flex flex-row items-center relative" ref={dropdownRef}>
                 <a href="https://github.com/tailwindadmin/admin"
                   className="text-white p-2 mr-2 no-underline hidden md:block lg:block">
-                  Github</a>
+                  Home</a>
 
                 <img
                   onClick={profileToggle}
@@ -69,7 +69,7 @@ const HeaderAdminDashboard = () => {
                 <a href="#"
                   onClick={profileToggle}
                   className="text-white p-2 no-underline hidden md:block lg:block cursor-pointer">
-                  Adam Wathan</a>
+                 Michael Bravo</a>
 
                 {isDropdownOpen && (
                   <div className="rounded shadow-md bg-white absolute top-12 right-1 w-48">
