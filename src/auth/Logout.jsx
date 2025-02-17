@@ -60,7 +60,7 @@ const LogoutModal = ({ isOpen, onClose }) => {
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <h4 className="modal-title">Logout</h4>
+              <h1 className="modal-title">Logout</h1>
               <button type="button" className="close text-3xl" onClick={onClose}>&#160;&times;&#160;</button>
             </div>
 
@@ -71,7 +71,7 @@ const LogoutModal = ({ isOpen, onClose }) => {
               <div className="d-flex justify-content-center gap-2 mt-3">
                 <CustomButton
                   className="btn btn-danger"
-                  textContent={loading ? "Logging out..." : "Yes"}
+                  textContent={loading ? "Ongoing..." : "Yes"}
                   onClick={handleLogout}
                   disabled={loading}
                 />

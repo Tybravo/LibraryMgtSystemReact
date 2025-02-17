@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AOS from "aos";
@@ -13,18 +14,16 @@ import HeaderAdmin from "./layout/HeaderAdmin";
 import RouterAdmin from "./layout/RouterAdmin";
 import HeaderAdminDashboard from "./layout/HeaderAdminDashboard";
 
-import SessionTimeout from "./auth/SessionTimeout";
-
 
 const App = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-      AOS.init({
-        duration: 1000,
-        once: true,
-      });
-    }, []);
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
 
   useEffect(() => {
     const storedSession = localStorage.getItem("sessionStatus") === "true";
@@ -42,7 +41,6 @@ const App = () => {
 
           setUser(response.data);
 
-          // Store session data in localStorage
           localStorage.setItem("sessionStatus", response.data.sessionStatus);
           localStorage.setItem("accessLevel", response.data.accessLevel);
         } catch (error) {
@@ -56,29 +54,9 @@ const App = () => {
     }
   }, []);
 
-// Logout function that clears everything (localStorage, sessionStorage, cookies)
-const handleLogout = () => {
-  localStorage.clear();
-  sessionStorage.clear();
-  clearSessionCookies();
-  window.location.href = "/"; // Redirect to home page
-};
-
-// Function to clear cookies
-const clearSessionCookies = () => {
-  document.cookie.split(";").forEach((cookie) => {
-    document.cookie = cookie
-      .replace(/^ +/, "")
-      .replace(/=.*/, `=;expires=${new Date(0).toUTCString()};path=/`);
-  });
-};
-
 
   return (
     <>
-     {/* Include SessionTimeout to monitor user activity */}
-     {user?.sessionStatus && <SessionTimeout onLogout={handleLogout} />}
-
       {user?.sessionStatus ? (
         user.accessLevel === 10 ? (
           <>
@@ -89,7 +67,7 @@ const clearSessionCookies = () => {
         ) : user.accessLevel === 20 ? (
           <>
             <HeaderAdmin />
-            <HeaderAdminDashboard/>
+            <HeaderAdminDashboard />
             <RouterAdmin />
             <Footer />
           </>

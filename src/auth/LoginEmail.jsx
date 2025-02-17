@@ -63,7 +63,7 @@ const LoginEmail = ({ isOpen, onClose }) => {
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <h4 className="modal-title">Login Here</h4>
+              <h1 className="modal-title">Login Here</h1>
               <button type="button" className="close text-3xl" onClick={onClose}>&#160;&times;&#160;</button>
             </div>
 

@@ -80,7 +80,7 @@ const RegisterModal = ({ isOpen, onClose }) => {
           <div className="modal-content">
             {/* Header */}
             <div className="modal-header">
-              <h4 className="modal-title">Register</h4>
+              <h1 className="modal-title">Register</h1>
               <button type="button" className="close text-3xl" onClick={onClose}>&#160;
                 &times;&#160;
               </button>
