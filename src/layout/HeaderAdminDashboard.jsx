@@ -5,7 +5,7 @@ import AOS from "aos";
 
 const HeaderAdminDashboard = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [isMenuOpen, setMenuOpen] = useState(false); // State for sidebar menu
+  const [isMenuOpen, setMenuOpen] = useState(true); // State for sidebar menu
   const dropdownRef = useRef(null);
 
   const profileToggle = () => {
@@ -13,6 +13,7 @@ const HeaderAdminDashboard = () => {
   };
 
   const toggleMenu = () => {
+     console.log("Menu icon clicked!"); // Debug log
     setMenuOpen(!isMenuOpen);
   };
 
@@ -65,8 +66,8 @@ const HeaderAdminDashboard = () => {
 
       <div className="flex flex-1">
         {/* Sidebar */}
-        <aside className={`bg-side-nav w-1/6 border-r ${isMenuOpen ? "block" : "hidden"} md:block`}>
-          <ul className="list-reset">
+        <aside className={`bg-side-nav w-1/6 border-r ${isMenuOpen ? "block" : "hidden"}`}>
+         <ul className="list-reset">
             <SidebarItem icon="fas fa-tachometer-alt" text="Dashboard" link="#" />
             <SidebarItem icon="fab fa-wpforms" text="Add Book" link="#" />
             <SidebarItem icon="fas fa-grip-horizontal" text="Shelve " link="#" />
