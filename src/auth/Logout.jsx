@@ -22,35 +22,65 @@ const LogoutModal = ({ isOpen, onClose }) => {
   };
 
   // Handle logout action
-  const handleLogout = async () => {
-    setLoading(true);
-    setResponseMessage("");
+const handleLogout = async () => {
+  setLoading(true);
+  setResponseMessage("");
 
-    try {
-      const response = await axios.post("http://localhost:8080/api/member/logout", {}, {
-        withCredentials: true, // Ensures cookies are included in the request
+  const userEmail = localStorage.getItem("email"); // Get the user email from local storage
+
+
+  try {
+    // Step 1: Call the logout API
+    const response = await axios.post("http://localhost:8080/api/member/logout", {}, {
+      withCredentials: true, // Ensures cookies are included in the request
+    });
+
+    // Step 2: Call the API to update session status in the database
+    if (userEmail) {
+      await axios.post("http://localhost:8080/api/member/update-session-status", { email: userEmail }, {
+        withCredentials: true,
       });
+    }
+    else {
+      console.error("No email found in local storage");
+    }
 
-      // Logout successful, clear session data
-      setResponseMessage(response.data.logoutMsg || "Logout successful");
-      setResponseColor("green");
+    // Logout successful, clear session data
+    setResponseMessage(response.data.logoutMsg || "Logout successful");
+    setResponseColor("green");
+    
+    // Clear session-related storage and cookies
+    localStorage.removeItem("userEmail"); // Clear stored email
+    localStorage.removeItem("email"); // Clear session email
+    localStorage.removeItem("accessLevel"); //Clear access level
+    localStorage.removeItem("sessionStatus"); //Clear session status
+    sessionStorage.clear(); // Clear session storage
+    clearSessionCookies(); // Clear cookies (including JSESSIONID)
 
-      // Clear session-related storage and cookies
-      localStorage.removeItem("userEmail"); // Clear stored email
-      localStorage.removeItem("email"); // Clear session email
-      localStorage.removeItem("accessLevel"); //Clear access level
-      localStorage.removeItem("sessionStatus"); //Clear session status
-      sessionStorage.clear(); // Clear session storage
-      clearSessionCookies(); // Clear cookies (including JSESSIONID)
+    window.location.href = "/";
+  } catch (error) {
+    const errorMessage = error.response?.data || "Logout failed. Try again.";
+    console.error("Logout Error:", errorMessage);
 
+    if (errorMessage === "No active session found for the user.") {
+      // Clear session-related storage and cookies if session is not active
+      localStorage.removeItem("userEmail");
+      localStorage.removeItem("email");
+      localStorage.removeItem("accessLevel");
+      localStorage.removeItem("sessionStatus");
+      sessionStorage.clear();
+      clearSessionCookies();
+
+      // Redirect to index page
       window.location.href = "/";
-    } catch (error) {
-      console.error("Logout Error:", error.response ? error.response.data : error.message);
-      setResponseMessage(error.response?.data || "Logout failed. Try again.");
+    } 
+    else {
+      setResponseMessage(errorMessage);
       setResponseColor("red");
     }
-    setLoading(false);
-  };
+  }
+  setLoading(false);
+};
 
 
   return (
