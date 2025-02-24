@@ -66,7 +66,7 @@ const HeaderAdminDashboard = () => {
 
       <div className="flex flex-1">
         {/* Sidebar */}
-        <aside className={`bg-side-nav w-1/6 border-r ${isMenuOpen ? "block" : "hidden"}`}>
+        <aside className={`bg-side-nav w-1\/6 border-r ${isMenuOpen ? "block" : "hidden"}`}>
          <ul className="list-reset">
             <SidebarItem icon="fas fa-tachometer-alt" text="Dashboard" link="#" />
             <SidebarItem icon="fab fa-wpforms" text="Add Book" link="#" />

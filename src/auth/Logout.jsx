@@ -30,20 +30,20 @@ const handleLogout = async () => {
 
 
   try {
-    // Step 1: Call the logout API
-    const response = await axios.post("http://localhost:8080/api/member/logout", {}, {
-      withCredentials: true, // Ensures cookies are included in the request
-    });
-
-    // Step 2: Call the API to update session status in the database
+    // Step 1: Call the API to update session status in the database
     if (userEmail) {
-      await axios.post("http://localhost:8080/api/member/update-session-status", { email: userEmail }, {
+      await axios.patch("http://localhost:8080/api/member/update-session-status", { email: userEmail }, {
         withCredentials: true,
       });
     }
     else {
       console.error("No email found in local storage");
     }
+
+     // Step 2: Call the logout API
+     const response = await axios.post("http://localhost:8080/api/member/logout", {}, {
+      withCredentials: true, // Ensures cookies are included in the request
+    });
 
     // Logout successful, clear session data
     setResponseMessage(response.data.logoutMsg || "Logout successful");
