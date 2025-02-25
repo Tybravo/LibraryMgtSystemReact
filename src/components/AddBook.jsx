@@ -1,0 +1,158 @@
+import { React, useState } from "react";
+import axios from "axios";
+import '../styles/admindashboard.css'
+import CustomButton from "../reusables/CustomButton";
+
+
+const AddBook = () => {
+    const initialData = {
+        bookTitle: "",
+        bookAuthor: "",
+        bookIsbn: "",
+        bookLink: "",
+        bookCurrency: "",
+        bookQuantity: 0,
+        bookPrice: 0
+      };
+    
+      const [formData, setFormData] = useState(initialData);
+      const [loading, setLoading] = useState(false);
+      const [responseMessage, setResponseMessage] = useState("");
+      const [responseColor, setResponseColor] = useState("");
+    
+      const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+      };
+    
+      const handleSubmit = async (event) => {
+        event.preventDefault();
+        setLoading(true);
+        setResponseMessage("");
+      
+        console.log("Submitting Data:", JSON.stringify(formData, null, 2)); // Log request payload
+      
+            try {
+              const response = await axios.post("http://localhost:8080/api/book/addBook", formData, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                withCredentials: true,
+              });
+          
+              setResponseMessage(response.data.regMsg || "Registration successful!");
+              setResponseColor("green"); 
+            setFormData(initialData);
+          } catch (error) {
+            console.error("Error Response:", error.response ? error.response.data : error.message);
+            setResponseMessage(error.response?.data || "Registration failed.");
+            setResponseColor("red");
+          }
+      setLoading(false);
+    };
+    
+    
+      return (
+        <>
+                <div className="p-4"> 
+                {/* Body */}
+                {responseMessage && <div style={{ color: responseColor }}>{responseMessage}</div>}
+    
+                <div className="modal-body">
+                  <form onSubmit={handleSubmit}>
+                    <input
+                      type="text"
+                      name="bookTitle"
+                      className="form-control"
+                      placeholder="Book Title"
+                      value={formData.bookTitle}
+                      onChange={handleChange}
+                      required
+                    />
+                    <input
+                      type="text"
+                      name="bookAuthor"
+                      className="form-control"
+                      placeholder="Book Author"
+                      value={formData.bookAuthor}
+                      onChange={handleChange}
+                      required
+                    />
+                    <input
+                      type="test"
+                      name="bookIsbn"
+                      className="form-control"
+                      placeholder="Book ISBN"
+                      value={formData.bookIsbn}
+                      onChange={handleChange}
+                      required
+                    />
+                    <textarea
+                      type="text"
+                      name="bookDescription"
+                      className="form-control"
+                      placeholder="Book Description"
+                      value={formData.bookDescription}
+                      onChange={handleChange}
+                      required
+                    />
+                    
+                    <input
+                      type="text"
+                      name="bookLink"
+                      className="form-control"
+                      placeholder="Book Link"
+                      value={formData.bookLink}
+                      onChange={handleChange}
+                      required
+                    />
+    
+                    <input
+                      type="text"
+                      name="bookCurrency"
+                      className="form-control"
+                      placeholder="Currency"
+                      value={formData.bookCurrency}
+                      onChange={handleChange}
+                      required
+                    />
+                    
+                    <input
+                      type="text"
+                      name="bookQuantity"
+                      className="form-control"
+                      placeholder="Book Quantity"
+                      value={formData.bookQuantity}
+                      onChange={handleChange}
+                      required
+                    />
+                    
+                    <input
+                      type="text"
+                      name="bookPrice"
+                      className="form-control"
+                      placeholder="Book Price"
+                      value={formData.bookPrice}
+                      onChange={handleChange}
+                      required
+                    />
+    
+                    <CustomButton
+                      className="btn btn-secondary"
+                      type="submit"
+                      textContent={loading ? "Adding..." : "Add Book"}
+                      disabled={loading} // Disable button when submitting
+                    />
+                  </form>
+            
+                </div>
+                </div>
+
+        </>
+      );
+}
+
+export default AddBook

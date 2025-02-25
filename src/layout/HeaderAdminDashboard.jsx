@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import '../assetz/dist/styles.css';
-import '../assetz/dist/all.css';    
+import '../assetz/dist/all.css'; 
+import AddBook from "../components/AddBook";
 import AOS from "aos";
+
 
 const HeaderAdminDashboard = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -66,16 +68,22 @@ const HeaderAdminDashboard = () => {
 
       <div className="flex flex-1">
         {/* Sidebar */}
-        <aside className={`bg-side-nav w-1\/6 border-r ${isMenuOpen ? "block" : "hidden"}`}>
+        <aside className={`bg-side-nav w-1/6 border-r ${isMenuOpen ? "block" : "hidden"}`}>
          <ul className="list-reset">
-            <SidebarItem icon="fas fa-tachometer-alt" text="Dashboard" link="#" />
-            <SidebarItem icon="fab fa-wpforms" text="Add Book" link="#" />
+            <SidebarItem icon="fas fa-tachometer-alt" text="Dashboard" link="/" />
+            <SidebarItem icon="fab fa-wpforms" text="Add Book" link="/addbook" />
             <SidebarItem icon="fas fa-grip-horizontal" text="Shelve " link="#" />
             <SidebarItem icon="fas fa-table" text="View Book" link="#" />
             <SidebarItem icon="fab fa-uikit" text="Update Book" link="#" />
             <SidebarItem icon="fas fa-square-full" text="Delete Book" link="#" />
           </ul>
         </aside>
+
+        {/* Main Content */}
+        <main className="flex-1 p-6">
+          {/* <AddBook /> */}
+        </main>
+        
       </div>
     </div>
   );

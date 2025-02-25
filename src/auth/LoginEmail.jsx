@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/loginmodal.css";
 import CustomButton from "../reusables/CustomButton";
-import LoginPassword from "./LoginPassword"; // Import password modal
+import LoginPassword from "./LoginPassword";
 
 
 const LoginEmail = ({ isOpen, onClose }) => {

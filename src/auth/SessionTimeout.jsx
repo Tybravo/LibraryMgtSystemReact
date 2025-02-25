@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import axios from "axios";
 
 
-const TIMEOUT_DURATION = 5 * 60 * 1000; // 30 minutes in milliseconds
+const TIMEOUT_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
 
 const SessionTimeout = () => {
   const timeoutRef = useRef(null);
