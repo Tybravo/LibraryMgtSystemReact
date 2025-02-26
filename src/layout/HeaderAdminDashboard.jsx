@@ -39,6 +39,7 @@ const HeaderAdminDashboard = () => {
     };
   }, []);
 
+  
   return (
     <div className="mx-auto bg-grey-400 min-h-screen flex flex-col">
       {/* Header */}
@@ -81,7 +82,7 @@ const HeaderAdminDashboard = () => {
 
         {/* Main Content */}
         <main className="flex-1 p-6">
-          {/* <AddBook /> */}
+          <AddBook />
         </main>
         
       </div>

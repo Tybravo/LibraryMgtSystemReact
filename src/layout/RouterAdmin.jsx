@@ -1,20 +1,16 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import HeaderAdminDashboard from "../layout/HeaderAdminDashboard";
-import AddBook from "../components/AddBook";
+import React from 'react'
+import '../App.css'
+import AddBook from '../components/AddBook'
+import { Routes, Route } from 'react-router-dom'
 
 const RouterAdmin = () => {
   return (
-    <div>
-      <HeaderAdminDashboard />  
-      
-      <div className="p-1">
-        <Routes>
-          <Route path="/addbook" element={<AddBook />} />
-        </Routes>
-      </div>
-    </div>
-  );
-};
 
-export default RouterAdmin;
+   <Routes>
+   <Route path = '/addbook' element={<AddBook/>}/>
+   </Routes>
+
+  )
+}
+
+export default RouterAdmin

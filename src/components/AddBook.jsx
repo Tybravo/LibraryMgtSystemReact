@@ -1,7 +1,10 @@
 import { React, useState } from "react";
 import axios from "axios";
 import '../styles/admindashboard.css'
+import '../assetz/dist/styles.css';
+import '../assetz/dist/all.css'; 
 import CustomButton from "../reusables/CustomButton";
+import HeaderAdminDashboard from "../layout/HeaderAdminDashboard";
 
 
 const AddBook = () => {
@@ -57,11 +60,16 @@ const AddBook = () => {
     
       return (
         <>
-                <div className="p-4"> 
+        <div>
+          <HeaderAdminDashboard/>
+        </div>
+
+              <main className="flex-1 p-6">
+                {/* <div className="p-4">  */}
                 {/* Body */}
-                {responseMessage && <div style={{ color: responseColor }}>{responseMessage}</div>}
+                {/* {responseMessage && <div style={{ color: responseColor }}>{responseMessage}</div>} */}
     
-                <div className="modal-body">
+                {/* <div className="modal-body"> */}
                   <form onSubmit={handleSubmit}>
                     <input
                       type="text"
@@ -148,8 +156,10 @@ const AddBook = () => {
                     />
                   </form>
             
-                </div>
-                </div>
+                {/* </div> */}
+                {/* </div> */}
+
+                </main>
 
         </>
       );
