@@ -60,16 +60,16 @@ const AddBook = () => {
     
       return (
         <>
-        <div>
+        {/* <div>
           <HeaderAdminDashboard/>
-        </div>
+        </div> */}
 
               <main className="flex-1 p-6">
-                {/* <div className="p-4">  */}
+                <div className="p-4"> 
                 {/* Body */}
-                {/* {responseMessage && <div style={{ color: responseColor }}>{responseMessage}</div>} */}
+                {responseMessage && <div style={{ color: responseColor }}>{responseMessage}</div>}
     
-                {/* <div className="modal-body"> */}
+                <div className="modal-body">
                   <form onSubmit={handleSubmit}>
                     <input
                       type="text"
@@ -156,8 +156,8 @@ const AddBook = () => {
                     />
                   </form>
             
-                {/* </div> */}
-                {/* </div> */}
+                </div>
+                </div>
 
                 </main>
 
