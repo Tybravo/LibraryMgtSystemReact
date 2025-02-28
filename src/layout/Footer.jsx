@@ -1,6 +1,7 @@
 import { React, useState} from "react";
 import "../styles/loginmodal.css";
 import CustomButton from "../reusables/CustomButton";
+import "../styles/admindashboard.css"
 
 
 const Footer= () => {

@@ -4,8 +4,6 @@ import '../styles/admindashboard.css'
 import '../assetz/dist/styles.css';
 import '../assetz/dist/all.css'; 
 import CustomButton from "../reusables/CustomButton";
-import HeaderAdminDashboard from "../layout/HeaderAdminDashboard";
-
 
 const AddBook = () => {
     const initialData = {
@@ -60,16 +58,10 @@ const AddBook = () => {
     
       return (
         <>
-        {/* <div>
-          <HeaderAdminDashboard/>
-        </div> */}
-
-              <main className="flex-1 p-6">
-                <div className="p-4"> 
                 {/* Body */}
                 {responseMessage && <div style={{ color: responseColor }}>{responseMessage}</div>}
     
-                <div className="modal-body">
+                <div className="mainBlockPanel">
                   <form onSubmit={handleSubmit}>
                     <input
                       type="text"
@@ -155,12 +147,8 @@ const AddBook = () => {
                       disabled={loading} // Disable button when submitting
                     />
                   </form>
-            
+                  
                 </div>
-                </div>
-
-                </main>
-
         </>
       );
 }

@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import '../assetz/dist/styles.css';
 import '../assetz/dist/all.css'; 
-import AddBook from "../components/AddBook";
 import AOS from "aos";
 
-
-const HeaderAdminDashboard = () => {
+const HeaderAdminDashboard = ({ children }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(true); // State for sidebar menu
   const dropdownRef = useRef(null);
@@ -81,9 +79,9 @@ const HeaderAdminDashboard = () => {
         </aside>
 
         {/* Main Content */}
-        {/* <main className="flex-1 p-6">
-          <AddBook />
-        </main> */}
+        <main className="flex-1 p-6">
+          {children}
+        </main>
         
       </div>
     </div>
