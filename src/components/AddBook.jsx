@@ -99,7 +99,6 @@ const AddBook = () => {
                       onChange={handleChange}
                       required
                     />
-                    
                     <input
                       type="text"
                       name="bookLink"
@@ -109,7 +108,6 @@ const AddBook = () => {
                       onChange={handleChange}
                       required
                     />
-    
                     <input
                       type="text"
                       name="bookCurrency"
@@ -119,7 +117,6 @@ const AddBook = () => {
                       onChange={handleChange}
                       required
                     />
-                    
                     <input
                       type="text"
                       name="bookQuantity"
@@ -129,7 +126,15 @@ const AddBook = () => {
                       onChange={handleChange}
                       required
                     />
-                    
+                    <input
+                      type="text"
+                      name="bookPrice"
+                      className="form-control"
+                      placeholder="Book Price"
+                      value={formData.bookPrice}
+                      onChange={handleChange}
+                      required
+                    />
                     <input
                       type="text"
                       name="bookPrice"
