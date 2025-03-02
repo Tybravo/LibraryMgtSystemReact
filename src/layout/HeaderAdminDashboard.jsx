@@ -39,7 +39,7 @@ const HeaderAdminDashboard = ({ children }) => {
 
   
   return (
-    <div className="mx-auto bg-grey-400 min-h-screen flex flex-col">
+<div className="">
       {/* Header */}
       <header className="bg-nav flex justify-between p-4">
         <div className="flex items-center">
@@ -65,9 +65,9 @@ const HeaderAdminDashboard = ({ children }) => {
         </div>
       </header>
 
-      <div className="flex flex-1">
-        {/* Sidebar */}
-        <aside className={`bg-side-nav w-1/6 border-r ${isMenuOpen ? "block" : "hidden"}`}>
+      <div className="flex flex-1 h-full">
+      {/* Sidebar */}
+        <aside className={`bg-side-nav w-1/6 border-r absolute ${isMenuOpen ? "block" : "hidden"}`}>
          <ul className="list-reset">
             <SidebarItem icon="fas fa-tachometer-alt" text="Dashboard" link="/" />
             <SidebarItem icon="fab fa-wpforms" text="Add Book" link="/addbook" />
@@ -79,8 +79,8 @@ const HeaderAdminDashboard = ({ children }) => {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-6">
-          {children}
+        <main className="flex-1 p-0 m-0">
+        {children}
         </main>
         
       </div>

@@ -4,26 +4,21 @@ import AdminDashboard from '../components/AdminDashboard'
 import AddBook from '../components/AddBook'
 import { Routes, Route } from 'react-router-dom'
 import HeaderAdminDashboard from '../layout/HeaderAdminDashboard';
+import '../styles/admindashboard.css'
 
 const RouterAdmin = () => {
   return (
-    <div className="main-content"> {/* Main content area */}
-   <Routes>
-    <Route path="/" element={
-       <HeaderAdminDashboard>
-         <AdminDashboard />
-       </HeaderAdminDashboard>
-     }/>
-     <Route path="/addbook" element={
-       <HeaderAdminDashboard>
-        <div className="mainz">
-         <AddBook />
-         </div>
-       </HeaderAdminDashboard>
-     }/>
-   </Routes>
-   </div>
-  )
-}
+    <div className="page-container">
+      <HeaderAdminDashboard />
+      <main> {/* Use main to ensure flex behavior */}
+        <Routes>
+          <Route path="/" element={<AdminDashboard />} />
+          <Route path="/addbook" element={<AddBook />} />
+        </Routes>
+      </main>
+    </div>
+  );
+};
+
 
 export default RouterAdmin

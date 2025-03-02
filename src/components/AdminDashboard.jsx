@@ -7,7 +7,9 @@ import '../assetz/dist/all.css';
 const AdminDashoard = () => {
   return (
     <div>
+     <div className="mainBlockPanel">
       <h2>Welcome to Admin Dashboard</h2>
+      </div>
       </div>
   )
 }

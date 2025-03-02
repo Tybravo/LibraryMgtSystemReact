@@ -61,6 +61,7 @@ const AddBook = () => {
                 {/* Body */}
                 {responseMessage && <div style={{ color: responseColor }}>{responseMessage}</div>}
     
+                {/* <div className="main-content"> */}
                 <div className="mainBlockPanel">
                   <form onSubmit={handleSubmit}>
                     <input
@@ -144,6 +145,42 @@ const AddBook = () => {
                       onChange={handleChange}
                       required
                     />
+                    <input
+                      type="text"
+                      name="bookPrice"
+                      className="form-control"
+                      placeholder="Book Price"
+                      value={formData.bookPrice}
+                      onChange={handleChange}
+                      required
+                    />
+                    <input
+                      type="text"
+                      name="bookPrice"
+                      className="form-control"
+                      placeholder="Book Price"
+                      value={formData.bookPrice}
+                      onChange={handleChange}
+                      required
+                    />
+                    <input
+                      type="text"
+                      name="bookPrice"
+                      className="form-control"
+                      placeholder="Book Price"
+                      value={formData.bookPrice}
+                      onChange={handleChange}
+                      required
+                    />
+                    <input
+                      type="text"
+                      name="bookPrice"
+                      className="form-control"
+                      placeholder="Book Price"
+                      value={formData.bookPrice}
+                      onChange={handleChange}
+                      required
+                    />
     
                     <CustomButton
                       className="btn btn-secondary"
@@ -152,7 +189,7 @@ const AddBook = () => {
                       disabled={loading} // Disable button when submitting
                     />
                   </form>
-                  
+                  {/* </div> */}
                 </div>
         </>
       );
