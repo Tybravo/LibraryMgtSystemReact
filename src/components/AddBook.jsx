@@ -172,15 +172,6 @@ const AddBook = () => {
                       onChange={handleChange}
                       required
                     />
-                    <input
-                      type="text"
-                      name="bookPrice"
-                      className="form-control"
-                      placeholder="Book Price"
-                      value={formData.bookPrice}
-                      onChange={handleChange}
-                      required
-                    />
     
                     <CustomButton
                       className="btn btn-secondary"
