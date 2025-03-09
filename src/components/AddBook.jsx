@@ -123,7 +123,7 @@ const AddBook = () => {
                       name="bookQuantity"
                       className="form-control"
                       placeholder="Book Quantity"
-                      value={formData.bookQuantity}
+                      value={formData.bookQuantity === 0 ? "" : formData.bookQuantity}
                       onChange={handleChange}
                       required
                     />
@@ -132,16 +132,7 @@ const AddBook = () => {
                       name="bookPrice"
                       className="form-control"
                       placeholder="Book Price"
-                      value={formData.bookPrice}
-                      onChange={handleChange}
-                      required
-                    />
-                    <input
-                      type="text"
-                      name="bookPrice"
-                      className="form-control"
-                      placeholder="Book Price"
-                      value={formData.bookPrice}
+                      value={formData.bookPrice === 0 ? "" : formData.bookPrice}
                       onChange={handleChange}
                       required
                     />

@@ -53,6 +53,33 @@
     animation: myfirst 5s linear 2s infinite alternate; /* Standard syntax */
     outline: none; /* Remove the default outline */
     }
+
+   textarea{
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    border-radius:4px;
+    padding:4px 14px;
+    border:2px solid #2995E2;
+    box-shadow: 0px 10px 14px -7px #2995E2;
+    -moz-box-shadow: 0px 10px 14px -7px #2995E2;
+    -webkit-box-shadow: 0px 10px 14px -7px #2995E2;
+    margin-top: 10px;
+    /* min-width: 358px; */
+    min-width: 60%;
+    height: 40px;
+  }
+  
+  textarea[type=text]:focus, input[type=email]:focus, input[type=password]:focus,textarea:focus,select:focus{
+    border:3px solid #ffaa22;
+    -moz-box-shadow: 0px 10px 14px -7px #ffaa22;
+    -webkit-box-shadow: 0px 10px 14px -7px #ffaa22;
+    box-shadow: 0px 10px 14px -7px #ffaa22;
+    -webkit-animation: myfirst 5s linear 2s infinite alternate; /* Chrome, Safari, Opera */
+    animation: myfirst 5s linear 2s infinite alternate; /* Standard syntax */
+    outline: none; /* Remove the default outline */
+    }
+
+  
   
     .btn{
         width: 120px;
