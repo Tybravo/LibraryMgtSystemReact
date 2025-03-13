@@ -10,6 +10,7 @@ const AddBook = () => {
         bookTitle: "",
         bookAuthor: "",
         bookIsbn: "",
+        bookDescription: "",
         bookLink: "",
         bookCurrency: "",
         bookQuantity: 0,
@@ -44,12 +45,12 @@ const AddBook = () => {
                 withCredentials: true,
               });
           
-              setResponseMessage(response.data.regMsg || "Registration successful!");
+              setResponseMessage(response.data.regMsg || "Book added successful!");
               setResponseColor("green"); 
             setFormData(initialData);
           } catch (error) {
             console.error("Error Response:", error.response ? error.response.data : error.message);
-            setResponseMessage(error.response?.data || "Registration failed.");
+            setResponseMessage(error.response?.data || "failed to add book.");
             setResponseColor("red");
           }
       setLoading(false);
