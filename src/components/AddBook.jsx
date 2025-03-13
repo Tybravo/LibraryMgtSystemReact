@@ -9,7 +9,7 @@ const AddBook = () => {
     const initialData = {
         bookTitle: "",
         bookAuthor: "",
-        bookIsbn: "",
+        bookIsbn: 0,
         bookDescription: "",
         bookLink: "",
         bookCurrency: "",
