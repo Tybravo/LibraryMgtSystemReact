@@ -4,6 +4,8 @@ import '../styles/admindashboard.css'
 import '../assetz/dist/styles.css';
 import '../assetz/dist/all.css'; 
 import CustomButton from "../reusables/CustomButton";
+import styles from "../reusables/AddBook.module.css"
+import responseStyles from "../reusables/ResponseMessage.module.css"
 
 const AddBook = () => {
     const initialData = {
@@ -22,6 +24,7 @@ const AddBook = () => {
       const [responseMessage, setResponseMessage] = useState("");
       const [responseColor, setResponseColor] = useState("");
     
+
       const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData((prevData) => ({
@@ -30,38 +33,59 @@ const AddBook = () => {
         }));
       };
     
+
       const handleSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
         setResponseMessage("");
       
-        console.log("Submitting Data:", JSON.stringify(formData, null, 2)); // Log request payload
+        console.log("Submitting Data:", JSON.stringify(formData, null, 2));
       
-            try {
-              const response = await axios.post("http://localhost:8080/api/book/addBook", formData, {
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                withCredentials: true,
-              });
-          
-              setResponseMessage(response.data.regMsg || "Book added successful!");
-              setResponseColor("green"); 
-            setFormData(initialData);
-          } catch (error) {
-            console.error("Error Response:", error.response ? error.response.data : error.message);
-            setResponseMessage(error.response?.data || "failed to add book.");
-            setResponseColor("red");
-          }
-      setLoading(false);
-    };
+        try {
+          const response = await addBook(formData);
+          handleSuccess(response.data?.regMsg || "Book added successfully!");
+        } catch (error) {
+          handleError(error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      
+
+      const addBook = async (data) => {
+        return await axios.post("http://localhost:8080/api/book/addBook", data, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        });
+      };
+      
+
+      const handleSuccess = (message) => {
+        setResponseMessage(message);
+        setResponseColor("green");
+        setFormData(initialData);
+      };
+      
+      const handleError = (error) => {
+        console.error("Error Response:", error.response?.data || error.message);
+        setResponseMessage(error.response?.data || "Failed to add book.");
+        setResponseColor("red");
+      };
+      
     
     
       return (
         <>
-                {/* Body */}
-                {responseMessage && <div style={{ color: responseColor }}>{responseMessage}</div>}
-    
+              {/* Body */}
+              {/* Display the response message only when it's not empty */}
+              {responseMessage && (
+                <p className={responseColor === "green" ? responseStyles.success : responseStyles.error}>
+                  {responseMessage}
+                </p>
+              )}
+                <h2 className={styles.mainHeading}>Add Book Here</h2>
+
+
                 {/* <div className="main-content"> */}
                 <div className="mainBlockPanel">
                   <form onSubmit={handleSubmit}>
@@ -84,11 +108,11 @@ const AddBook = () => {
                       required
                     />
                     <input
-                      type="test"
+                      type="text"
                       name="bookIsbn"
                       className="form-control"
                       placeholder="Book ISBN"
-                      value={formData.bookIsbn}
+                      value={formData.bookIsbn === 0 ? "" : formData.bookIsbn}
                       onChange={handleChange}
                       required
                     />
@@ -125,15 +149,6 @@ const AddBook = () => {
                       className="form-control"
                       placeholder="Book Quantity"
                       value={formData.bookQuantity === 0 ? "" : formData.bookQuantity}
-                      onChange={handleChange}
-                      required
-                    />
-                    <input
-                      type="text"
-                      name="bookPrice"
-                      className="form-control"
-                      placeholder="Book Price"
-                      value={formData.bookPrice === 0 ? "" : formData.bookPrice}
                       onChange={handleChange}
                       required
                     />
