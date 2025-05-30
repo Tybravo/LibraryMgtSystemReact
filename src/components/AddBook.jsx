@@ -161,6 +161,15 @@ const AddBook = () => {
                       onChange={handleChange}
                       required
                     />
+                     <input
+                      type="text"
+                      name="bookPrice"
+                      className="form-control"
+                      placeholder="Book Cost"
+                      value={formData.bookPrice === 0 ? "" : formData.bookPrice}
+                      onChange={handleChange}
+                      required
+                    />
                     
                     
                     
